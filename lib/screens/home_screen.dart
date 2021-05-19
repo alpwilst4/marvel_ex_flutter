@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marvel_ex_flutter/data/data.dart';
 
 class HomeScreen extends StatelessWidget {
-  CharacterData characterData = CharacterData();
+  final CharacterData characterData = CharacterData();
 
   Future<dynamic> getData() async {
     final data = await characterData.getCharacterData();
