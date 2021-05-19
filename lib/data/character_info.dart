@@ -11,7 +11,7 @@ class CharacterInfo extends ChangeNotifier {
   }
 
   void addData(String name,String url){
-    final characterData = CharacterData(characterName: name,imageUrl: url);
+    final characterData = CharacterData();
     _characterDatas.add(characterData);
     notifyListeners();
 

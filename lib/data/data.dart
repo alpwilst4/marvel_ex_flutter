@@ -9,12 +9,13 @@ const size = "/portrait_small.jpg";
 
 class CharacterData {
 
-  CharacterData({this.characterName,this.imageUrl});
+  //CharacterData({this.characterName,this.imageUrl});
 
-  final String imageUrl;
-  final String characterName;
+ 
   
   Future<dynamic> getCharacterData() async {
+    String imageUrl;
+    String characterName;
     var ts = DateTime.now().millisecondsSinceEpoch;
     var completedKey = ts.toString() + privateKey + publicKey;
     var hash = md5.convert(utf8.encode(completedKey)).toString();
@@ -24,8 +25,12 @@ class CharacterData {
             "https://gateway.marvel.com/v1/public/characters?ts=$ts&apikey=$publicKey&hash=$hash");
             print("https://gateway.marvel.com/v1/public/characters?ts=$ts&apikey=$publicKey&hash=$hash");
     var data = await networkHelper.getData();
+    imageUrl = "${data["data"]["results"][0]["thumbnail"]["path"].toString()+size}";
+    
 
-    print("${data["data"]["results"][0]["thumbnail"]["path"].toString()+size}");
+  print(imageUrl);
+    //print("${data["data"]["results"][0]["thumbnail"]["path"].toString()+size}");
+    
     
     
   }
