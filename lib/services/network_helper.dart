@@ -1,6 +1,6 @@
 
 
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -16,9 +16,9 @@ class NetworkHelper {
 
 
      if (response.statusCode == 200) {
-      String data = response.body;
+      
 
-      return json.decode(data);
+      return response;
     } else
       print(response.statusCode);
 
