@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:marvel_ex_flutter/models/character.dart';
 import 'package:http/http.dart' as http;
+import 'package:marvel_ex_flutter/models/comics.dart';
+
+import 'detail_page.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -36,8 +41,6 @@ class _CharacterListState extends State<CharacterList> {
   int count = 30;
   @override
   Widget build(BuildContext context) {
-    
-
     ScrollController _scrollController = ScrollController();
 
     _scrollController.addListener(() {
@@ -73,10 +76,24 @@ class CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        
+      onTap: () async {
+        Comics comic = Comics();
+        List<Comics> newStyle =
+            await comic.getComicDatas(jsonEncode(characters[index].comics));
+
+        //print(newStyle[0].name);
+
+        return Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailPage(
+                      name: characters[index].name,
+                      imageUrl: characters[index].imageUrl,
+                      description: characters[index].description,
+                      comics: newStyle,
+                    )));
       },
-          child: Card(
+      child: Card(
           child: ListTile(
         leading: SizedBox(
             height: 40,

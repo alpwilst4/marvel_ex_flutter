@@ -4,13 +4,13 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:marvel_ex_flutter/data/data.dart';
 
-const size = "/portrait_small.jpg";
+const size = "/portrait_xlarge.jpg";
 
 class Character {
   final String name;
   final String imageUrl;
   final String description;
-  final String comics;
+  final Map comics;
   Character({this.name, this.imageUrl,this.description,this.comics});
 
   factory Character.fromJson(Map<String, dynamic> json) {
@@ -18,10 +18,11 @@ class Character {
       name: json['name'].toString(),
       imageUrl: json['thumbnail']['path'].toString() + size,
       description: json['description'].toString(),
-      //comics: json['comics']['items']["name"]
+      comics: json['comics'],
     );
   }
 }
+
 
 List<Character> parseCharacterData(String responseBody) {
   final Map<String, dynamic> parsed = jsonDecode(responseBody);
